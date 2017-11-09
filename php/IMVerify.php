@@ -47,8 +47,6 @@ Class IMVerify {
         curl_setopt($ch, CURLOPT_TIMEOUT, 120);
         $result = curl_exec($ch);
 
-        echo var_export($result, 1);
-
         preg_match_all('|\<code\>.*\<\/code\>|U', $result, $matches, PREG_PATTERN_ORDER);
         if(isset($matches[0])&&isset($matches[0][0])) {
             if( $matches[0][0] == '<code>200</code>' ) {
