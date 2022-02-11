@@ -1,8 +1,8 @@
 <?php
 Class IMVerify {
     const IM_PUBLIC_KEY = ''; // Iletimerkezi api public key, panel ustunden olusturabilirsiniz.
-    const IM_SECRET_KEY = ''; // Iletimerkezi api secret key, panel ustunden olusturabilirsiniz.
-    const IM_SENDER     = 'ILETI MRKZI'; // Mesajin iletilecegi baslik bilgisi.
+    const IM_HASH = ''; // Iletimerkezi api secret key, panel ustunden olusturabilirsiniz.
+    const IM_SENDER = 'ILETI MRKZI'; // Mesajin iletilecegi baslik bilgisi.
 
     private function createVerificationCode() {
         $_SESSION['vcode'] = rand(100000, 999999);
@@ -14,13 +14,12 @@ Class IMVerify {
 
         $code   = $this->createVerificationCode();
         $text   = 'Doğrulama kodunuz: '.$code;
-        $p_hash = hash_hmac('sha256', self::IM_PUBLIC_KEY, self::IM_SECRET_KEY);
 
         $xml = '
         <request>
             <authentication>
                 <key>'.self::IM_PUBLIC_KEY.'</key>
-                <hash>'.$p_hash.'</hash>
+                <hash>'.self::IM_HASH.'</hash>
             </authentication>
             <order>
                 <sender>'.self::IM_SENDER.'</sender>
